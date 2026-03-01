@@ -1,0 +1,4 @@
+# Runtime dependencies
+openai>=1.0,<2
+anthropic>=0.25,<1
+python-dotenv>=1.0,<2
