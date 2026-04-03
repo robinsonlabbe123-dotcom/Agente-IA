@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pliego Studio</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/fabric@5.3.0/dist/fabric.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Pliego Studio</h1>
+        <p class="subtitle">Preparación profesional de pliegos DTF / Sublimación</p>
+      </div>
+      <div class="topbar-status">
+        <span id="sheetSummary">58 × 100 cm</span>
+        <span class="dot"></span>
+        <span id="projectStatus">Listo</span>
+      </div>
+      <div class="quick-actions">
+        <button id="quickPng" class="btn primary">Exportar PNG</button>
+        <button id="quickPdf" class="btn">Exportar PDF</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <section>
+          <h2>Pliego</h2>
+          <div class="grid-2">
+            <label>Ancho (cm)
+              <input id="sheetWidthCm" type="number" min="10" max="150" step="0.5" value="58" />
+            </label>
+            <label>Alto (cm)
+              <input id="sheetHeightCm" type="number" min="10" max="200" step="0.5" value="100" />
+            </label>
+          </div>
+          <button id="applySheet" class="btn block">Aplicar tamaño</button>
+          <p class="hint">Vista de edición optimizada; exportación real a 300 DPI.</p>
+        </section>
+
+        <section>
+          <h2>Archivos</h2>
+          <label class="upload-btn">Seleccionar diseños
+            <input id="fileInput" type="file" accept=".png,.jpg,.jpeg,.webp,.svg" multiple />
+          </label>
+          <div id="dropzone" class="dropzone">Arrastra y suelta PNG/JPG/WEBP/SVG</div>
+          <p class="hint" id="fileFeedback">Sin archivos cargados.</p>
+        </section>
+
+        <section>
+          <h2>Objeto seleccionado</h2>
+          <p id="selectionInfo">Selecciona un objeto para editar.</p>
+          <div class="actions-grid">
+            <button id="duplicateBtn" class="btn">Duplicar</button>
+            <button id="deleteBtn" class="btn danger">Eliminar</button>
+            <button id="bringFrontBtn" class="btn">Traer frente</button>
+            <button id="sendBackBtn" class="btn">Enviar atrás</button>
+            <button id="rotateLeftBtn" class="btn">↺ -15°</button>
+            <button id="rotateRightBtn" class="btn">↻ +15°</button>
+          </div>
+        </section>
+
+        <section>
+          <h2>Auto-layout</h2>
+          <label>Margen de seguridad (cm)
+            <input id="safetyMargin" type="number" min="0" max="5" step="0.1" value="0.5" />
+          </label>
+          <button id="autoLayoutBtn" class="btn block">Auto-Acomodar y Expandir</button>
+          <p class="hint" id="layoutFeedback">Optimiza distribución sin solapamientos.</p>
+        </section>
+
+        <section>
+          <h2>Fondo</h2>
+          <div class="segmented" id="backgroundSelector">
+            <button data-bg="transparent" class="active">Transparente</button>
+            <button data-bg="white">Blanco</button>
+            <button data-bg="black">Negro</button>
+          </div>
+        </section>
+
+        <section>
+          <h2>Exportación</h2>
+          <label class="check-line">
+            <input id="flattenAlpha" type="checkbox" />
+            Limpiar semitransparencias (alpha 0/255)
+          </label>
+          <div class="actions-grid one-col">
+            <button id="exportPngBtn" class="btn primary">Exportar PNG 300 DPI</button>
+            <button id="exportPdfBtn" class="btn">Exportar PDF imprenta</button>
+          </div>
+          <p class="hint" id="exportFeedback">Recomendación móvil: usar PDF para pliegos grandes.</p>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <div id="canvasContainer" class="canvas-container">
+          <canvas id="editorCanvas"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottombar">
+      <div class="zoom-controls">
+        <button id="zoomOut" class="btn">-</button>
+        <span id="zoomLabel">100%</span>
+        <button id="zoomIn" class="btn">+</button>
+        <button id="resetView" class="btn">Reset vista</button>
+        <button id="centerView" class="btn">Centrar</button>
+      </div>
+      <p class="hint">Tip: rueda del mouse para zoom · barra espaciadora + arrastrar para pan</p>
+    </footer>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
